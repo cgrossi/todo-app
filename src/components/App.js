@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios'
+import taskService from '../services/taskService';
 
 import Header from './Header'
 import Table from './Table'
@@ -12,27 +12,32 @@ const App = () => {
     e.preventDefault();
 
     const task = {
-      id: Math.floor(Math.random() * 100000),
       content: e.target.newTask.value,
       important: e.target.isImportant.checked
     }
 
-    setTasks([...tasks, task])
+    taskService
+      .create(task)
+      .then(returnedTask => setTasks([...tasks, returnedTask]))
   }
 
   useEffect(() => {
-    axios.get('http://localhost:3001/tasks')
-      .then(response => response.data)
-      .then(tasks => {
-        setTasks(tasks)
-      })
+    taskService
+      .fetchTasks()
+      .then(tasks => setTasks(tasks))
   }, [])
 
+  const handleEditTaskSave = (id, updatedTask, cb) => {
+    taskService
+      .update(id, updatedTask)
+      .then(returnedTask => setTasks(tasks.map(task => task.id !== id ? task : returnedTask)))
+      .then(() => cb())
+  }
 
   return (
     <div>
       <Header />
-      <Table tasks={tasks} />
+      <Table tasks={tasks} handleEditTaskSave={handleEditTaskSave}/>
       <Create handleSubmit={handleSubmitTask} />
     </div>
   )
