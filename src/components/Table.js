@@ -2,7 +2,7 @@ import React from 'react';
 
 import TableRow from './TableRow'
 
-const Table = ({ tasks, handleEditTaskSave }) => {
+const Table = ({ tasks, handleEditTaskSave, handleDeleteTask }) => {
 
   return (
   <table className="table table-striped table-bordered table-hover table-dark container">
@@ -15,7 +15,7 @@ const Table = ({ tasks, handleEditTaskSave }) => {
       </tr>
     </thead>
     <tbody>
-    {tasks.map(task => <TableRow key={task.id} task={task} handleEditTaskSave={handleEditTaskSave} />)}
+    {tasks.map(task => <TableRow key={task.id} task={task} handleEditTaskSave={handleEditTaskSave} handleDeleteTask={handleDeleteTask} />)}
     </tbody>
   </table>
   )

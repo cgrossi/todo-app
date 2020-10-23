@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 
-const TableRow = ({ task, handleEditTaskSave }) => {
+const TableRow = ({ task, handleEditTaskSave, handleDeleteTask }) => {
   const [isEdit, setIsEdit] = useState(false);
   const [isImportant, setIsImportant] = useState(task.important);
   const [taskContent, setTaskContent] = useState("");
@@ -37,7 +37,7 @@ const TableRow = ({ task, handleEditTaskSave }) => {
       <th scope="row">{task.id}</th>
       <td>{task.content}</td>
       <td>{task.important ? "Yes" : "Not really"}</td>
-      <td><button type="button" className="btn btn-light" onClick={() => setIsEdit(!isEdit)}>Edit</button> <button type="button" className="btn btn-light">Delete</button></td>
+      <td><button type="button" className="btn btn-light" onClick={() => setIsEdit(!isEdit)}>Edit</button> <button type="button" className="btn btn-light" onClick={() => handleDeleteTask(task.id)}>Delete</button></td>
     </tr>
     )
   }

@@ -34,10 +34,16 @@ const App = () => {
       .then(() => cb())
   }
 
+  const handleDeleteTask = (id) => {
+    taskService
+      .remove(id)
+      .then(() => setTasks(tasks.filter(task => task.id !== id)))
+  }
+
   return (
     <div>
       <Header />
-      <Table tasks={tasks} handleEditTaskSave={handleEditTaskSave}/>
+      <Table tasks={tasks} handleEditTaskSave={handleEditTaskSave} handleDeleteTask={handleDeleteTask} />
       <Create handleSubmit={handleSubmitTask} />
     </div>
   )

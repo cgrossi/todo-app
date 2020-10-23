@@ -1,5 +1,5 @@
 import axios from 'axios'
-const baseUrl = 'http://localhost:3001/api/tasks'
+const baseUrl = 'https://shrouded-badlands-02340.herokuapp.com/api/tasks'
 
 const create = (task) => {
   const request = axios.post(baseUrl, task)
@@ -17,7 +17,7 @@ const fetchTasks = () => {
 }
 
 const remove = (id) => {
-  const request = axios.delete(id)
+  const request = axios.delete(`${baseUrl}/${id}`)
   return request.then(response => response.data)
 }
 

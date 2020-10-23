@@ -3,7 +3,9 @@ import React from 'react';
 const Header = () => {
   return (
     <div className="container">
-      <h1>Do The Things</h1>
+      <div className="jumbotron">
+        <h1>CRUD Demonstration Task Application</h1>
+      </div>
     </div>
   )
 }
